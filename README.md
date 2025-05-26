@@ -4,6 +4,8 @@
 
 <div align="center">Khai-Nguyen Nguyen*, <b>Khai Le-Duc*</b>, Bach Phan Tat, Duy Le, Long Vo-Dang, Truong-Son Hy</div>
 
+<div align="center">*Equal contribution</div>
+
 > Please press ⭐ button and/or cite papers if you feel helpful.
 
 <p align="center">
