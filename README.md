@@ -32,7 +32,7 @@ Please cite this paper: [https://arxiv.org/abs/2407.21054](https://arxiv.org/abs
 This repository contains scripts for automatic speech recognition (ASR) and sentiment reasoning using cascaded sequence-to-sequence (seq2seq) audio-language models. The provided scripts cover model preparation, training, inference, and evaluation processes, based on the dataset in the paper.
 
 ## Dataset and Pre-trained Models:
-[🤗 HuggingFace Dataset]()
+[🤗 HuggingFace Dataset](https://huggingface.co/datasets/leduckhai/Sentiment-Reasoning)
 
 [🤗 HuggingFace Models]()
 
