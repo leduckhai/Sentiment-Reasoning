@@ -2,7 +2,7 @@
 
 **<div align="center">ACL 2025 Industry Track (Oral)</div>**
 
-<div align="center">Khai-Nguyen Nguyen*, <b>Khai Le-Duc*</b>, Bach Phan Tat, Duy Le, Long Vo-Dang, Truong-Son Hy</div>
+<div align="center"><b>Khai-Nguyen Nguyen*</b>, <b>Khai Le-Duc*</b>, Bach Phan Tat, Duy Le, Long Vo-Dang, Truong-Son Hy</div>
 
 <div align="center">*Equal contribution</div>
 
@@ -16,7 +16,6 @@
 <p align="center">
   <img src="https://github.com/leduckhai/Sentiment-Reasoning/blob/master/SentimentReasoning_ACL2025.png" width="700"/>
 </p>
-<p align="center"><em>Sentiment Reasoning poster at ACL 2025</em></p>
 
 * **Abstract:**
 Transparency in AI healthcare decision-making is crucial. By incorporating rationales to explain reason for each predicted label, users could understand Large Language Models (LLMs)’s reasoning to make better decision. In this work, we introduce a new task - **Sentiment Reasoning** - for both speech and text modalities, and our proposed multimodal multitask framework and **the world's largest multimodal sentiment analysis dataset**. Sentiment Reasoning is an auxiliary task in sentiment analysis where the model predicts both the sentiment label and generates the rationale behind it based on the input transcript. Our study conducted on both human transcripts and Automatic Speech Recognition (ASR) transcripts shows that Sentiment Reasoning helps improve model transparency by providing rationale for model prediction with quality semantically comparable to humans while also improving model's classification performance (**+2% increase in both accuracy and macro-F1**)  via rationale-augmented fine-tuning. Also, no significant difference in the semantic quality of generated rationales between human and ASR transcripts. All code, data (**five languages - Vietnamese, English, Chinese, German, and French**) and models are published online.
