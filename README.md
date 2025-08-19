@@ -69,12 +69,9 @@ GitHub: https://github.com/leduckhai
 ```
 
 **Khai-Nguyen Nguyen**
-
-This dude is smarter than me and thus deserves your attention :relaxed:
 ```
 College of William and Mary, USA
 GitHub: https://github.com/nkn002
 Hugging Face: https://huggingface.co/knguyennguyen
-Homepage: https://nkn002.github.io/
 ```
 
