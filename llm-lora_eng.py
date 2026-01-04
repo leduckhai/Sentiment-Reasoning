@@ -44,17 +44,13 @@ peft_config = LoraConfig(
 )
 
 
-tokenizer = AutoTokenizer.from_pretrained(model_name_or_path, token='hf_GxsYTZDZhHcQEzYEvWrus')
+tokenizer = AutoTokenizer.from_pretrained(model_name_or_path)
 model = AutoModelForCausalLM.from_pretrained(
     model_name_or_path,
-#     load_in_8bit=True,
     torch_dtype=torch.bfloat16, 
     device_map="auto",
-#     use_cache=True,
     cache_dir='./models',
     load_in_8bit=True,
-    token='hf_GxsYTZDZhHcQEzYEvWrus'
-
 )
 
 model.enable_input_require_grads()
