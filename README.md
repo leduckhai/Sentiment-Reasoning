@@ -38,7 +38,7 @@ This repository contains scripts for automatic speech recognition (ASR) and sent
 ## Dataset and Pre-trained Models:
 🤗 **HuggingFace Dataset**: [https://huggingface.co/datasets/leduckhai/Sentiment-Reasoning](https://huggingface.co/datasets/leduckhai/Sentiment-Reasoning)
 
-🤗 **HuggingFace Models**: to be released soon!
+🤗 **HuggingFace Models**: 
 
 | Model Name       | Description                                | Link                                                                 |
 |------------------|--------------------------------------------|----------------------------------------------------------------------|
@@ -48,6 +48,12 @@ This repository contains scripts for automatic speech recognition (ASR) and sent
 | `German-LLM`  | LLM fine-tuned on German set          | to be released soon! |
 | `Vietnamese-LLM`  | LLM fine-tuned on Chinese set          | to be released soon! |
 | `Multilingual-LLM`  | LLM fine-tuned on Multilingual set (5 languages)        | to be released soon! |
+
+To load the model:
+```
+from transformers import AutoModel
+model = AutoModel.from_pretrained("leduckhai/Sentiment-Reasoning", subfolder="Vietnamese_Vistral-7B", dtype="auto") # or any subset desired
+```
 
 **Paperswithcodes** to be released soon!
 
