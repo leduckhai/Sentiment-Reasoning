@@ -42,17 +42,13 @@ This repository contains scripts for automatic speech recognition (ASR) and sent
 
 | Model Name       | Description                                | Link                                                                 |
 |------------------|--------------------------------------------|----------------------------------------------------------------------|
-| `Vietnamese_Vistral-7B`     | LLM fine-tuned on Vietnamese set        | [Hugging Face models](https://huggingface.co/leduckhai/Sentiment-Reasoning/tree/main/Vietnamese_Vistral-7B) |
-| `English-LLM`    | LLM fine-tuned on English set         | to be released soon! |
-| `French-LLM`  | LLM fine-tuned on French set          | to be released soon!    |
-| `German-LLM`  | LLM fine-tuned on German set          | to be released soon! |
-| `Vietnamese-LLM`  | LLM fine-tuned on Chinese set          | to be released soon! |
-| `Multilingual-LLM`  | LLM fine-tuned on Multilingual set (5 languages)        | to be released soon! |
+| `Sentiment-Reasoning-Vi`     | LLM fine-tuned on Vietnamese set        | [Hugging Face models](https://huggingface.co/leduckhai/Sentiment-Reasoning/tree/main/Vietnamese_Vistral-7B) |
+| `Sentiment-Reasoning-Eng`    | LLM fine-tuned on English set         | [Hugging Face models](https://huggingface.co/knguyennguyen/Sentiment-Reasoning-Eng) |
 
 To load the model:
 ```
 from transformers import AutoModel
-model = AutoModel.from_pretrained("leduckhai/Sentiment-Reasoning", subfolder="Vietnamese_Vistral-7B", dtype="auto") # or any subset desired
+model = AutoModel.from_pretrained("leduckhai/Sentiment-Reasoning", subfolder="Vietnamese_Vistral-7B", dtype="auto")
 ```
 
 **Paperswithcodes** to be released soon!

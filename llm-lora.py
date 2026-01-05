@@ -61,17 +61,20 @@ model = get_peft_model(model, peft_config)
 model.print_trainable_parameters()
 
 
-train_df = pd.read_excel('multitask/distilling-step-by-step/train_rationale.xlsx')#pd.concat([df, df_dev]).reset_index(drop=True)
-train_df['label'] = train_df['label'].astype(str)
+# Load the Sentiment-Reasoning dataset from Hugging Face
+ds = load_dataset("leduckhai/Sentiment-Reasoning")
 
-train_dataset = Dataset.from_pandas(train_df)
+# Get train and test splits
+train_dataset = ds['train']
+test_dataset = ds['test']
 
-testset =  pd.read_excel('test.xlsx')
+# Convert label to string
+train_dataset = train_dataset.map(lambda x: {'label': str(x['label'])})
+test_dataset = test_dataset.map(lambda x: {'label': str(x['label'])})
 
-testset['label'] = testset['label'].astype(str)
-print(train_df['label'].unique())
-print(testset['label'].unique())
-test_dataset = Dataset.from_pandas(testset[['text', 'label']])
+print("Train labels:", set(train_dataset['label']))
+print("Test labels:", set(test_dataset['label']))
+print(f"Train size: {len(train_dataset)}, Test size: {len(test_dataset)}")
 
 
 def template(inp, out, rationale=''):
@@ -83,17 +86,13 @@ def template(inp, out, rationale=''):
 #     print(out)
     prompt = tokenizer.apply_chat_template(conversation, tokenize=False)
     prompt = (prompt +str(out).strip()+'\n'+rationale.strip()).strip()
-    print(prompt)
     return prompt
-# , train_dataset[rationale_col]
-# reformatted_output = [reformat(inp, out) for inp, out in zip(dataset['train']['words'], dataset['train']['tags'])]
+
 if rationale_col == '':
     new_column_train = [template(inp, out) for inp, out in zip(train_dataset['text'], train_dataset['label'])]
 else:
     new_column_train = [template(inp, out, rationale) for inp, out, rationale in zip(train_dataset['text'], train_dataset['label'], train_dataset[rationale_col])]
 train_dataset= train_dataset.add_column("train_text", new_column_train)
-# new_column_train = [template(inp, out) for inp, out in zip(test_dataset['text'], test_dataset['label'])]
-# test_dataset= test_dataset.add_column("train_text", new_column_train)
 
 
 # Load the individual metrics
@@ -105,23 +104,17 @@ recall = evaluate.load("recall")
 def compute_metrics(eval_pred):
     logits, labels = eval_pred
     logits = np.argmax(logits, axis=-1)
-    print(logits, labels)
     labels = np.where(labels != -100, labels, tokenizer.pad_token_id)
     decoded_preds = tokenizer.batch_decode(logits, skip_special_tokens=True)
-    print('decoded_preds', decoded_preds)
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
     decoded_preds = [pred if pred.isdigit() else -1 for pred in decoded_preds]  # Replace non-digit predictions with '-1'
     decoded_labels = [label if label.isdigit() else -1 for label in decoded_labels]  # Replace non-digit labels with '-1'
     predictions = decoded_preds
     labels = decoded_labels
-    print( f1.compute(predictions=predictions, references=labels, average=None)['f1'])
-    print(set(decoded_preds))
     neg,neu,pos = f1.compute(predictions=predictions, references=labels, average=None)['f1']
     metrics_result = {
         "accuracy": accuracy.compute(predictions=predictions, references=labels)['accuracy'],
         "macro_f1": f1.compute(predictions=predictions, references=labels, average='macro')['f1'],
-#         "macro_precision": precision.compute(predictions=predictions, references=labels, average='macro')['precision'],
-#         "macro_recall": recall.compute(predictions=predictions, references=labels, average='macro')['recall'],
         "f1_neg": neg,
         "f1_neu": neu,
         "f1_pos": pos

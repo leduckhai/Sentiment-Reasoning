@@ -43,18 +43,21 @@ print(f"Model checkpoint: {model_checkpoint}")
 id2label = {'0': "negative", '1': "neutral", '2': "positive"}
 label2id = {"negative": '0', "neutral": '1', 'positive': '2'}
 
-train_df = pd.read_excel('train.xlsx')#pd.concat([df, df_dev]).reset_index(drop=True)
-train_df['label'] = train_df['label'].astype(str)
+# Load the Sentiment-Reasoning dataset from Hugging Face
+ds = load_dataset("leduckhai/Sentiment-Reasoning")
 
-train_dataset = Dataset.from_pandas(train_df)
+# Get train and test splits
+train_dataset = ds['train']
+test_dataset = ds['test']
 
-testset =  pd.read_excel('test.xlsx')
+# Convert label to string
+train_dataset = train_dataset.map(lambda x: {'label': str(x['label'])})
+test_dataset = test_dataset.map(lambda x: {'label': str(x['label'])})
 
-# Then convert the modified DataFrame to a Hugging Face dataset
-testset['label'] = testset['label'].astype(str)
-print(train_df['label'].unique())
-print(testset['label'].unique())
-test_dataset = Dataset.from_pandas(testset[['text', 'label']])
+print("Train labels:", set(train_dataset['label']))
+print("Test labels:", set(test_dataset['label']))
+print(f"Train size: {len(train_dataset)}, Test size: {len(test_dataset)}")
+
 
 # Output unique values to verify
 
